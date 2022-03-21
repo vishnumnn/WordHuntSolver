@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\WordHuntSolver\WordHuntSolver.csproj" />
+  </ItemGroup>
+</Project>
