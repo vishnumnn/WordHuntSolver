@@ -13,16 +13,19 @@ namespace WordHuntSolver
             board = matrix;
         }
 
-        public static void PrintMatrix(char[,] matrix)
+        public static string PrintMatrix(char[,] matrix)
         {
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    Console.Write(matrix[i, j] + " ");
+                    sb.Append(matrix[i, j]);
+                    sb.Append(" ");
                 }
-                Console.WriteLine();
+                sb.Append("\n");
             }
+            return sb.ToString();
         }
 
         public char[,] CreateMatrixFromArray(List<Tuple<int, int>> letterList)

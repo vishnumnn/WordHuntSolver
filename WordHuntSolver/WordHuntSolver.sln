@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHuntSolver", "WordHuntSolver.csproj", "{09497279-1956-4D9C-B5CA-2DF5AA6CD004}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHuntInterface", "..\WordHuntInterface\WordHuntInterface.csproj", "{E815E99A-6BDC-4C7C-A38F-6161235CD348}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHuntSolverTests", "..\WordHuntSolverTests\WordHuntSolverTests.csproj", "{ED95C66F-8ED7-4599-8546-E46FC04FD218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHuntRunner", "..\WordHuntRunner\WordHuntRunner.csproj", "{5D21172A-126D-43E7-BA0A-A438ADA0B13E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{09497279-1956-4D9C-B5CA-2DF5AA6CD004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09497279-1956-4D9C-B5CA-2DF5AA6CD004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09497279-1956-4D9C-B5CA-2DF5AA6CD004}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E815E99A-6BDC-4C7C-A38F-6161235CD348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E815E99A-6BDC-4C7C-A38F-6161235CD348}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E815E99A-6BDC-4C7C-A38F-6161235CD348}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E815E99A-6BDC-4C7C-A38F-6161235CD348}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED95C66F-8ED7-4599-8546-E46FC04FD218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED95C66F-8ED7-4599-8546-E46FC04FD218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED95C66F-8ED7-4599-8546-E46FC04FD218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED95C66F-8ED7-4599-8546-E46FC04FD218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D21172A-126D-43E7-BA0A-A438ADA0B13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D21172A-126D-43E7-BA0A-A438ADA0B13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D21172A-126D-43E7-BA0A-A438ADA0B13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D21172A-126D-43E7-BA0A-A438ADA0B13E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

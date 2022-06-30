@@ -9,7 +9,7 @@ namespace WordHuntSolver
     {
         public ITrie trie;
         public String address;
-
+        
         public Solver(string wordsPath = "./CollinsScrabbleWords.txt")
         {
             address = wordsPath;
@@ -69,10 +69,10 @@ namespace WordHuntSolver
             return adjs;
         }
 
-        public HashSet<List<Tuple<int, int>>> SolveWordHunt(char[,] matrix)
+        public HashSet<ProgressiveWord> SolveWordHunt(char[,] matrix, int minLetterCount)
         {
             Queue<ProgressiveWord> q = new Queue<ProgressiveWord>();
-            HashSet<List<Tuple<int, int>>> found = new HashSet<List<Tuple<int, int>>>();
+            var found = new HashSet<ProgressiveWord>();
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
@@ -85,11 +85,11 @@ namespace WordHuntSolver
             {
                 var curr = q.Dequeue();
                 string currStr = curr.ToString();
-                if(curr.Len() >= 3 && trie.HasWord(currStr))
+                if(currStr.Length >= minLetterCount && trie.HasWord(currStr))
                 {
-                    found.Add(curr.letterList);
+                    found.Add(curr);
                 }
-                else if (trie.HasPrefix(currStr))
+                if (trie.HasPrefix(currStr))
                 {
                     var adjs = GetValidAdjacents(matrix, curr);
                     foreach(var adj in adjs)

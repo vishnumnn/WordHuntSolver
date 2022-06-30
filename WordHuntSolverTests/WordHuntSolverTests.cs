@@ -23,6 +23,7 @@ namespace WordHuntSolverTests
             Solver sl = new Solver(filepath);
             int expected = 279496;
             Assert.AreEqual(expected, sl.trie.Count());
+            Assert.IsTrue(sl.trie.HasPrefix("H"));
         }
 
         [TestMethod]
@@ -31,7 +32,7 @@ namespace WordHuntSolverTests
             string filepath = "C:\\Users\\VishnuM\\source\\repos\\WordHunt\\WordHuntSolver\\CollinsScrabbleWords.txt";
             Solver sl = new Solver(filepath);
 
-            char[,] matrix = { { 'h', 'e', 'l' }, { 'm', 'n', 's' }, { 'm', 'i', 'g' } };
+            char[,] matrix = { { 'H', 'E', 'L' }, { 'M', 'N', 'S' }, { 'M', 'I', 'G' } };
             List<Tuple<int, int>> hem = new List<Tuple<int, int>>()
             {
                 new Tuple<int, int>(0, 0),
@@ -142,9 +143,19 @@ namespace WordHuntSolverTests
                 new Tuple<int, int>(0, 2),
                 new Tuple<int, int>(1, 2)
             };
-            var expected = new HashSet<List<Tuple<int, int>>>{ els, mel, leng, sig, sin, nis, mis, gins, gis, gin, ing, mig, ming, hemming, hens, hen, hem};
-            var actual = sl.SolveWordHunt(matrix);
-            Assert.AreEqual(expected, actual);
+            var wordList = new List<List<Tuple<int, int>>>{ els, mel, leng, sig, sin, nis, mis, gins, gis, gin, ing, mig, ming, hemming, hens, hen, hem};
+            var expected = new HashSet<ProgressiveWord>();
+            foreach(var letterList in wordList)
+            {
+                expected.Add(new ProgressiveWord(letterList));
+            }
+            var actual = sl.SolveWordHunt(matrix, 4);
+            Outputter o = new Outputter(matrix);
+            foreach(var p in actual)
+            {
+                var s = Outputter.PrintMatrix(o.CreateMatrixFromArray(p.letterList));
+            }
+            Assert.IsTrue(expected.SetEquals(actual));
         }
     }
 }

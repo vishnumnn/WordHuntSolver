@@ -1,5 +1,6 @@
 ﻿using System;
 using WordHuntSolver;
+using Outputter;
 
 namespace WordHuntInterface
 {
@@ -7,7 +8,7 @@ namespace WordHuntInterface
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter Input a row at a time!");
+            Console.WriteLine("Enter Input a row at a time");
             char[,] matrix = new char[4, 4];
             for(int i = 0; i < 4; i++)
             {
@@ -20,7 +21,15 @@ namespace WordHuntInterface
                 }
             }
             Console.WriteLine("Your input.");
-            Utility.PrintMatrix(matrix);
+            Outputter o = new Outputter(matrix);
+
+            Console.WriteLine();
+            var actual = sl.SolveWordHunt(matrix, 4);
+            foreach(var ProgWord in actual)
+            {
+                Outputter.PrintMatrix(Outputter.CreateMatrixFromArray(ProgWord.letterList));
+                Console.WriteLine();
+            }
         }
     }
 }
