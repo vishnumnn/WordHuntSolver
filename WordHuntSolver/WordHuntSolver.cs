@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using rm.Trie;
 
-namespace WordHuntKiller
+namespace WordHuntSolver
 {
     public class WordHuntSolver
     {
-        static HashSet<string> words = new HashSet<string>();
-        static String address = "./CollinsScrabbleWords.txt";
+        String address;
         char[,] matrix = new char[4, 4];
 
-        public WordHuntSolver(char[,] matrix)
+        public WordHuntSolver(char[,] matrix, string wordsPath = "./CollinsScrabbleWords.txt")
         {
             this.matrix = matrix;
+            address = wordsPath;
         }
 
-        private static void LoadDictionary()
+        private void LoadDictionary()
         {
             using (StreamReader SR = new StreamReader(address))
             {
                 string line = "";
                 while ((line = SR.ReadLine()) != null)
                 {
-                    words.Add(line);
+
                 }
             }
 
@@ -81,10 +82,9 @@ namespace WordHuntKiller
         public static void SolveWordHunt()
         {
             Queue<ProgressiveWord> q = new Queue<ProgressiveWord>();
-            HashSet<char> visited = new HashSet<char>();
             while(q.Count > 0)
             {
-
+                if()
             }
         }
     }

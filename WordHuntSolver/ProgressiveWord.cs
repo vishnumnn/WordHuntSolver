@@ -2,39 +2,49 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHuntKiller
+namespace WordHuntSolver
 {
     public class ProgressiveWord
     {
-        List<Tuple<int, int>> pWord;
+        StringBuilder sb;
+        Tuple<int, int> latest;
         HashSet<Tuple<int, int>> letterSet;
         
         public ProgressiveWord(char c, int i, int j)
         {
-            pWord = new List<Tuple<int, int>>();
+            sb = new StringBuilder(c);
             letterSet = new HashSet<Tuple<int, int>>();
-            var x = new Tuple<int, int>(i, j);
-            pWord.Add(x);
-            letterSet.Add(x);
+            latest = new Tuple<int, int>(i, j);
+            letterSet.Add(latest);
         }
 
-        public void AddLetter(int i, int j)
+        public void AddLetter(char c, int i, int j)
         {
-            var letterTuple = new Tuple<int, int>(i, j);
-            pWord.Add(letterTuple);
-            letterSet.Add(letterTuple);
+            latest = new Tuple<int, int>(i, j);
+            letterSet.Add(latest);
+            sb.Append(c);
         }
 
-        public Tuple<int, int> Peek()
-        {
-            return pWord[pWord.Count];
-        }
-
-        public Boolean IsValid(Tuple<int, int> letter)
+        public bool IsValid(Tuple<int, int> letter)
         {
             if (letterSet.Contains(letter))
                 return false;
             return true;
+        }
+
+        public Tuple<int, int> Peek()
+        {
+            return latest;
+        }
+
+        public int Len()
+        {
+            return letterSet.Count;
+        }
+
+        public override string ToString()
+        {
+            return sb.ToString();
         }
     }
 }
