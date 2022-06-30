@@ -9,6 +9,7 @@ namespace WordHuntSolver
         StringBuilder sb;
         Tuple<int, int> latest;
         HashSet<Tuple<int, int>> letterSet;
+        public List<Tuple<int, int>> letterList;
         
         public ProgressiveWord(char c, int i, int j)
         {
@@ -16,6 +17,7 @@ namespace WordHuntSolver
             letterSet = new HashSet<Tuple<int, int>>();
             latest = new Tuple<int, int>(i, j);
             letterSet.Add(latest);
+            letterList.Add(latest);
         }
 
         public Boolean IsValid(Tuple<int, int> letter)
@@ -28,9 +30,10 @@ namespace WordHuntSolver
         public ProgressiveWord CloneWithLetter(char c, int i, int j)
         {
             ProgressiveWord clone = new ProgressiveWord(c, i, j);
-            foreach(var tup in this.letterSet)
+            foreach(var tup in this.letterList)
             {
                 clone.letterSet.Add(tup);
+                clone.letterList.Add(tup);
             }
             return clone;
         }

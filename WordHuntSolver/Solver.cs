@@ -5,16 +5,16 @@ using rm.Trie;
 
 namespace WordHuntSolver
 {
-    public class WordHuntSolver
+    public class Solver
     {
-        ITrie trie;
-        String address;
-        char[,] matrix = new char[4, 4];
+        public ITrie trie;
+        public String address;
 
-        public WordHuntSolver(char[,] matrix, string wordsPath = "./CollinsScrabbleWords.txt")
+        public Solver(string wordsPath = "./CollinsScrabbleWords.txt")
         {
-            this.matrix = matrix;
             address = wordsPath;
+            trie = new Trie();
+            LoadDictionary();
         }
 
         private void LoadDictionary()
@@ -30,19 +30,8 @@ namespace WordHuntSolver
 
         }
 
-        private char[,] CreateMatrixFromArray(Tuple<int, int>[] ar)
-        {
-            char[,] res = new char[4, 4];
-            foreach (Tuple<int, int> el in ar)
-            {
-                (var i, var j) = el;
-                res[i, j] = matrix[i, j];
-            }
-            return res;
-        }
 
-
-        private List<Tuple<int, int>> GetValidAdjacents(ProgressiveWord curr)
+        private List<Tuple<int, int>> GetValidAdjacents(char[,] matrix , ProgressiveWord curr)
         {
             List<Tuple<int, int>> adjs = new List<Tuple<int, int>>();
             (int i, int j) = curr.Peek();
@@ -80,10 +69,10 @@ namespace WordHuntSolver
             return adjs;
         }
 
-        public HashSet<string> SolveWordHunt()
+        public HashSet<List<Tuple<int, int>>> SolveWordHunt(char[,] matrix)
         {
             Queue<ProgressiveWord> q = new Queue<ProgressiveWord>();
-            HashSet<string> found = new HashSet<string>();
+            HashSet<List<Tuple<int, int>>> found = new HashSet<List<Tuple<int, int>>>();
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
@@ -98,11 +87,11 @@ namespace WordHuntSolver
                 string currStr = curr.ToString();
                 if(curr.Len() >= 3 && trie.HasWord(currStr))
                 {
-                    found.Add(currStr);
+                    found.Add(curr.letterList);
                 }
                 else if (trie.HasPrefix(currStr))
                 {
-                    var adjs = GetValidAdjacents(curr);
+                    var adjs = GetValidAdjacents(matrix, curr);
                     foreach(var adj in adjs)
                     {
                         q.Enqueue(curr.CloneWithLetter(matrix[adj.Item1, adj.Item2], adj.Item1, adj.Item2));
