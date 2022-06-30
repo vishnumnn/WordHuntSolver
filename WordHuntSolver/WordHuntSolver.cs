@@ -7,6 +7,7 @@ namespace WordHuntSolver
 {
     public class WordHuntSolver
     {
+        ITrie trie;
         String address;
         char[,] matrix = new char[4, 4];
 
@@ -23,7 +24,7 @@ namespace WordHuntSolver
                 string line = "";
                 while ((line = SR.ReadLine()) != null)
                 {
-
+                    trie.AddWord(line);
                 }
             }
 
@@ -79,13 +80,36 @@ namespace WordHuntSolver
             return adjs;
         }
 
-        public static void SolveWordHunt()
+        public HashSet<string> SolveWordHunt()
         {
             Queue<ProgressiveWord> q = new Queue<ProgressiveWord>();
-            while(q.Count > 0)
+            HashSet<string> found = new HashSet<string>();
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                if()
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    q.Enqueue(new ProgressiveWord(matrix[i, j], i, j));
+                }
             }
+
+            while (q.Count > 0)
+            {
+                var curr = q.Dequeue();
+                string currStr = curr.ToString();
+                if(curr.Len() >= 3 && trie.HasWord(currStr))
+                {
+                    found.Add(currStr);
+                }
+                else if (trie.HasPrefix(currStr))
+                {
+                    var adjs = GetValidAdjacents(curr);
+                    foreach(var adj in adjs)
+                    {
+                        q.Enqueue(curr.CloneWithLetter(matrix[adj.Item1, adj.Item2], adj.Item1, adj.Item2));
+                    }
+                }
+            }
+            return found;
         }
     }
 }

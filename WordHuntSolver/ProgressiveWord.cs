@@ -18,18 +18,21 @@ namespace WordHuntSolver
             letterSet.Add(latest);
         }
 
-        public void AddLetter(char c, int i, int j)
-        {
-            latest = new Tuple<int, int>(i, j);
-            letterSet.Add(latest);
-            sb.Append(c);
-        }
-
-        public bool IsValid(Tuple<int, int> letter)
+        public Boolean IsValid(Tuple<int, int> letter)
         {
             if (letterSet.Contains(letter))
                 return false;
             return true;
+        }
+
+        public ProgressiveWord CloneWithLetter(char c, int i, int j)
+        {
+            ProgressiveWord clone = new ProgressiveWord(c, i, j);
+            foreach(var tup in this.letterSet)
+            {
+                clone.letterSet.Add(tup);
+            }
+            return clone;
         }
 
         public Tuple<int, int> Peek()
