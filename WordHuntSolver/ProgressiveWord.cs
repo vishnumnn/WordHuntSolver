@@ -69,7 +69,12 @@ namespace WordHuntSolver
         public override bool Equals(object obj)
         {
             var word = (ProgressiveWord)obj;
-            return letterList.SequenceEqual(word.letterList);
+            return sb.Equals(word.sb);
+        }
+
+        public override int GetHashCode()
+        {
+            return sb.ToString().GetHashCode();
         }
     }
 }
